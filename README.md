@@ -1,6 +1,6 @@
 # Fall Alert project
 
-**Description**: Rasberry Pi project to detect if a person fall down and send help signal
+**Description:** Rasberry Pi project to detect if a person fall down and send help signal
 
 ## How to install
 ```bash
