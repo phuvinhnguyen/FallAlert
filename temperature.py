@@ -1,7 +1,19 @@
+'''
+Temperature sensor monitoring
+
+This module implements the protocol to detect high temperature and send help signal
+
+The following functions are required to be implemented:
+
+1. read_temperature() - To be implemented: Read temperature sensor data
+   - This function return temperature sensor data (integer value)
+   - Use Celsius unit
+'''
+
 from time import time
 from .alarm import *
 
-def read_temperature():
+def read_temperature() -> int:
     # To be implemented: Read temperature sensor data
     pass
 
@@ -15,4 +27,4 @@ def monitor_temperature():
             alert_protocol()
             break
         
-        time.sleep(1)
+        time.sleep(120)
