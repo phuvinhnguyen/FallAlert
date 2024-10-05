@@ -11,7 +11,7 @@ The following functions are required to be implemented:
 '''
 
 from time import time
-from .alarm import *
+from alarm import *
 
 def read_temperature() -> int:
     # To be implemented: Read temperature sensor data
