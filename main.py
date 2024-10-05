@@ -1,5 +1,8 @@
-import time
+from time import time, sleep
 import threading
+from alarm import *
+from gyroscope import *
+from temperature import *
 from alarm import *
 from gyroscope import *
 from temperature import *
@@ -22,4 +25,4 @@ if __name__ == "__main__":
         fall_thread.join()
         temp_thread.join()
 
-        time.sleep(30)
+        sleep(30)

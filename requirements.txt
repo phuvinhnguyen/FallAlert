@@ -1,0 +1,4 @@
+git+https://github.com/phuvinhnguyen/OnlineDatabase.git
+requests
+json
+sense_hat

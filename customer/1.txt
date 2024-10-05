@@ -1,0 +1,11 @@
+{
+    "ip": "130.243.202.154",
+    "city": "Uppsala",
+    "region": "Uppsala",
+    "country": "SE",
+    "loc": "59.8588,17.6389",
+    "org": "AS43844 Uppsala Student Network",
+    "postal": "741 51",
+    "timezone": "Europe/Stockholm",
+    "readme": "https://ipinfo.io/missingauth"
+}
