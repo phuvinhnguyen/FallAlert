@@ -1,8 +1,8 @@
 import time
 import threading
-from .alarm import *
-from .gyroscope import *
-from .temperature import *
+from alarm import *
+from gyroscope import *
+from temperature import *
 
 def monitor_fall():
     '''
