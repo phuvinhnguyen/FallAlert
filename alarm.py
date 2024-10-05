@@ -8,6 +8,7 @@ The following functions are required to be implemented:
 
 Those functions will be called by the main program (FallAlert/main.py) and other functions
 '''
+from sender import *
 
 def play_sound():
     # To be implemented: Play a sound alarm
@@ -22,3 +23,4 @@ def alert_protocol() -> None:
     print("Alert triggered!")
     play_sound()
     trigger_light()
+    public_calling()
