@@ -32,39 +32,44 @@ def read_temperature():
 
 def monitor_temperature():
     """
-    Monitor the temperature from the sensor and trigger alert if temperature exceeds 
-    26°C for more than 3 minutes.
+    Monitor the temperature from the sensor and trigger alert if temperature exceeds
+    the high temperature threshold or if the temperature is high for a long period without movement.
+    
+    - If temperature exceeds 40°C, an alert is triggered immediately.
+    - If temperature is above 26°C for more than the delay duration without movement, an alert is triggered.
+    - If movement is detected, the alarm is prevented.
     """
-    high_temp_threshold = 40  # temperature threshold in Celsius
-    delay_duration = 25  # 25 seconds
-    consecutive_time = 0  # how long the temperature stays above the threshold
-    check_interval = 5  # check every 5 seconds
-    flag_movement = 0   #flag to see if there is no movement
+    high_temp_threshold = 40  # Immediate alert if temperature exceeds 40°C
+    delay_duration = 15  # Monitor for 15 seconds before triggering an alert if there's no movement
+    consecutive_time = 0  # Time for which the temperature remains above the threshold
+    check_interval = 5  # Check every 5 seconds
+    flag_movement = 0  # A flag to track if no movement is detected
 
     while True:
         temp_data = read_temperature()
-
-        if temp_data > high_temp_threshold:
+        
+        # If the temperature is below the high threshold, monitor for movement
+        if temp_data < high_temp_threshold:
             consecutive_time += check_interval
-            print("High temperature detected: " + str(temp_data) + "°C for "+ str(consecutive_time) + " seconds")
-            if check_for_movement() == 'alarm': #Function returns alarm when no movement
-               flag_movement += 1 #Increases when there is no movement
-            else:
-               flag_movement = 0   
+            print("No movement detected. Temp: " + str(temp_data) + "°C for " + str(consecutive_time) + " seconds.")
             
+            if check_for_movement() == 'alarm': #Function returns alarm if no movement is detected
+                flag_movement += 1  # Increase the flag count if no movement is detected
+            else:
+                flag_movement = 0  # Reset the flag if movement is detected
+            
+            # Check if the temperature has been high for the entire duration without movement
             if consecutive_time >= delay_duration:
-               #check_for_movement(); #dummy function that returns alarm if there is no movement
-               if flag_movement >= delay_duration/check_interval :
-                  alert_protocol()
-
-               #TODO: If the gyroscope and accelerometer readings go back to normal, do not trigger the alarm_protocol, value stating if readings are normal
-               # If normal -> continue
-               # If abnormal -> trigger alert
-                  break  # Exit the loop after triggering the alert
+                if flag_movement >= delay_duration / check_interval:
+                    print("Temperature below threshold but no movement detected for the duration. Triggering alert.")
+                    alert_protocol()  # Trigger alert when no movement for the set duration
+                    break  # Exit the loop after triggering the alert
         else:
-            # Reset if temperature drops below the threshold
-            print("Temperature dropped to " + str(temp_data) + "°C. Resetting timer.")
+            # If temperature exceeds the high threshold, immediately trigger the alert
+            print("High temperature detected: " + str(temp_data) + "°C. Triggering alert immediately.")
+            alert_protocol()
             consecutive_time = 0
+            break
 
-        sleep(check_interval)
+        sleep(check_interval)  # Wait before the next check
 
