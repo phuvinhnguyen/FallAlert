@@ -2,7 +2,8 @@ from time import time
 from alarm import *
 from sense_hat import SenseHat
 from time import sleep
-from .alarm import *
+from alarm import *
+from gyroscope import *
 
 """
 Temperature sensor monitoring
