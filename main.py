@@ -10,19 +10,24 @@ from temperature import *
 def monitor_fall():
 
     while True:
-        monitor_loop()
-        time.sleep(3)
+        status=monitor_loop()
+        if status=='alarm':
+            monitor_temperature()
+        time.sleep(1)
 
 if __name__ == "__main__":
+    
+
+    monitor_fall()
     # Start the fall and temperature monitoring in separate threads
-    while True:
-        fall_thread = threading.Thread(target=monitor_fall)
-        temp_thread = threading.Thread(target=monitor_temperature)
 
-        fall_thread.start()
-        temp_thread.start()
+  #  fall_thread = threading.Thread(target=monitor_fall)
+   # temp_thread = threading.Thread(target=monitor_temperature)
 
-        fall_thread.join()
-        temp_thread.join()
+    #fall_thread.start()
+   # temp_thread.start()
 
-        sleep(30)
+    #fall_thread.join()
+    #temp_thread.join()
+
+    sleep(1)
