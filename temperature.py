@@ -74,3 +74,5 @@ def monitor_temperature():
 
         sleep(check_interval)  # Wait before the next check
 
+if __name__ == "__main__":
+    monitor_temperature()
