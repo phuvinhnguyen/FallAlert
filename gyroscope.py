@@ -6,9 +6,9 @@ import math
 sense = SenseHat()
 
 # Thresholds for detecting a fall
-GYRO_THRESHOLD = 500  # Angular velocity threshold (degrees per second)
-ACC_THRESHOLD = 2.5   # Linear acceleration threshold (g-force)
-ACC_LOW_THRESHOLD = 0.5  # Low acceleration after fall (impact)
+GYRO_THRESHOLD = 100  # Angular velocity threshold (degrees per second)
+ACC_THRESHOLD = 0.2   # Linear acceleration threshold (g-force)
+ACC_LOW_THRESHOLD = 0.2  # Low acceleration after fall (impact)
 GYRO_NO_MOVEMENT_THRESHOLD = 10  # Angular velocity threshold for no movement
 
 # Time to wait after impact to detect no movement (seconds)
