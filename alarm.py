@@ -74,13 +74,19 @@ def joystick_event(event):
         print("Joystick pressed, stopping alert...")
         alert_active = False  # Set the alert_active flag to False to stop the alert
 
-## TODO: Implement alert_protocol
-## Implement sound alarm
-# def alert_protocol() -> None:
-#     # Function to handle alert mechanism (play sound, trigger light, etc.)
-#     print("Alert triggered!")
-#     # play_sound() # 
-#     trigger_light()
+
+def alert_protocol():
+    # Register joystick event listener
+    sense.stick.direction_any = joystick_event
+    
+    try:
+        # Start the LED alert
+        trigger_led()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Clean up the LED display after stopping
+        sense.clear()
 
 
 if __name__ == "__main__":
