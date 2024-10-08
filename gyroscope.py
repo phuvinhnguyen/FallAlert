@@ -103,3 +103,5 @@ def handle_fall_status(fall_status):
         # No fall detected, normal operation
         print("No fall detected.")
 
+if __name__ == "__main__":
+    pass

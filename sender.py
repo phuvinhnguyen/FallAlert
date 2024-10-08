@@ -19,3 +19,6 @@ def public_calling():
         f'customer/warning.txt',
         get_location()
         )
+    
+if __name__ == '__main__':
+    public_calling()

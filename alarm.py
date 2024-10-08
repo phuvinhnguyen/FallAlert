@@ -74,7 +74,8 @@ def joystick_event(event):
         print("Joystick pressed, stopping alert...")
         alert_active = False  # Set the alert_active flag to False to stop the alert
 
-
+## TODO: Implement alert_protocol
+## Implement sound alarm
 # def alert_protocol() -> None:
 #     # Function to handle alert mechanism (play sound, trigger light, etc.)
 #     print("Alert triggered!")
