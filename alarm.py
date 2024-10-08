@@ -2,6 +2,7 @@ import time
 import smtplib
 from sense_hat import SenseHat
 from email.mime.text import MIMEText
+from .sender import *
 
 '''
 Alarm mechanism
@@ -30,6 +31,9 @@ SMTP_PORT = 587
 
 def send_email():
     try:
+        public_calling()
+        location_data = get_location()
+
         # Set up the server connection
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()  # Secure the connection
@@ -37,7 +41,7 @@ def send_email():
         
         # Create the email content
         subject = "Fall Alert"
-        body = "A fall has been detected! Please check up on your patient immediately."
+        body = "A fall has been detected! Please check up on your patient immediately. Location details below - \n\n " + location_data
         msg = MIMEText(body)
         msg['Subject'] = subject
         msg['From'] = SENDER_EMAIL
