@@ -104,4 +104,7 @@ def handle_fall_status(fall_status):
         print("No fall detected.")
 
 if __name__ == "__main__":
-    monitor_loop()
+    while True:
+        print(monitor_loop())
+        time.sleep(0.5)
+        
