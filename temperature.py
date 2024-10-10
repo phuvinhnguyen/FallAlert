@@ -42,9 +42,9 @@ def monitor_temperature():
     - If movement is detected, the alarm is prevented.
     """
     high_temp_threshold = 40  # Immediate alert if temperature exceeds 40°C
-    delay_duration = 15  # Monitor for 15 seconds before triggering an alert if there's no movement
+    delay_duration = 5  # Monitor for 15 seconds before triggering an alert if there's no movement
     consecutive_time = 0  # Time for which the temperature remains above the threshold
-    check_interval = 5  # Check every 5 seconds
+    check_interval = 1  # Check every 5 seconds
     flag_movement = 0  # A flag to track if no movement is detected
 
     while True:
@@ -55,9 +55,11 @@ def monitor_temperature():
             consecutive_time += check_interval
             print("No movement detected. Temp: " + str(temp_data) + "°C for " + str(consecutive_time) + " seconds.")
             
-            if check_for_movement() == 'alarm': #Function returns alarm if no movement is detected
-                flag_movement += 1  # Increase the flag count if no movement is detected
+            if monitor_loop() == True or check_for_movement() == 'alarm' or monitor_loop() == 'impact': #Function returns alarm if no movement is detected
+               print("alarm rings") 
+               flag_movement += 1  # Increase the flag count if no movement is detected
             else:
+                print("No alarm")
                 flag_movement = 0  # Reset the flag if movement is detected
             
             # Check if the temperature has been high for the entire duration without movement
