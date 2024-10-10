@@ -6,13 +6,13 @@ import math
 sense = SenseHat()
 
 # Thresholds for detecting a fall
-GYRO_THRESHOLD = 100  # Angular velocity threshold (degrees per second)
-ACC_THRESHOLD = 0.2   # Linear acceleration threshold (g-force)
-ACC_LOW_THRESHOLD = 0.2  # Low acceleration after fall (impact)
-GYRO_NO_MOVEMENT_THRESHOLD = 10  # Angular velocity threshold for no movement
+GYRO_THRESHOLD = 1.7  # Angular velocity threshold (degrees per second)
+ACC_THRESHOLD = 1.7   # Linear acceleration threshold (g-force)
+ACC_LOW_THRESHOLD = 1.7  # Low acceleration after fall (impact)
+GYRO_NO_MOVEMENT_THRESHOLD = 1.7  # Angular velocity threshold for no movement
 
 # Time to wait after impact to detect no movement (seconds)
-INACTIVITY_TIME = 15  
+INACTIVITY_TIME = 5  
 
 def read_gyroscope():
     """Reads gyroscope data (angular velocity) from the Sense HAT."""
@@ -85,7 +85,8 @@ def monitor_loop():
         movement_status = check_for_movement()
         if movement_status == 'alarm':
             return 'alarm'
-    
+
+    handle_fall_status(fall_status)
     return fall_status
 
 def handle_fall_status(fall_status):
@@ -105,6 +106,6 @@ def handle_fall_status(fall_status):
 
 if __name__ == "__main__":
     while True:
-        print(monitor_loop())
-        time.sleep(0.5)
+        print(monitor_loop(), check_for_movement())
+        time.sleep(1)
         
