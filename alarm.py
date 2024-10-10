@@ -2,7 +2,7 @@ import time
 import smtplib
 from sense_hat import SenseHat
 from email.mime.text import MIMEText
-from .sender import *
+from sender import *
 
 '''
 Alarm mechanism
@@ -60,16 +60,22 @@ def trigger_led():
     global alert_active
     red = [255, 0, 0]
     
-    # send an email when the alert is active
-    send_email()  
+    LED_FLASH_TIME=10
+    start_time = time.time()
 
     # Flash the LED matrix until alert is deactivated by joystick press
-    while alert_active:
+    while time.time() - start_time < LED_FLASH_TIME:
         sense.clear(red)
         time.sleep(0.5)
         sense.clear()  # Turn off the LEDs
         time.sleep(0.5)
 
+    # send an email when the alert is active
+    try:
+        send_email()
+    except Exception as e:
+        print (e)
+    
     sense.clear()  # Clear the matrix when alert is deactivated
 
 def joystick_event(event):
